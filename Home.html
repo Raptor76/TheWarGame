@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>The War Game</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Src/Style.css" />
+    <link rel="icon" type="image/png" href="Img/Tank.png">
+
+</head>
+
+<body>
+
+    <div class="header" id="header">
+        <h1 class="title"><img src="Img/Tank.png" class="tank-logo">The War Game</h1>
+    </div>
+
+    <div class="game-rule" id="game">
+
+        <div id="rules">
+
+            <h2>Règles du jeu</h2>
+
+            <p>Nombre de joueurs : 2<br />
+                <br />
+                -The War Game est un jeu en tour par tour<br/>
+                -Chaque joueur dispose de 10 PV<br/>
+                -Vous avez le choix entre attaquer l'ennemi et lui enlever 3 PV, vous protégez et éviter 2 PV de dégats, ou vous soignez et ainsi récupérer 2 PV.<br/>
+                -Prêts ? C'est parti !
+            </p>
+
+            <input type="button" value="Jouer" id="start-btn" onclick="play()">
+
+
+        </div>
+
+    </div>
+
+    <a class="version" href="Src/New.txt" target="_blank">v.0.0.5</a>
+    <script async src="Src/Dyna.js"></script>
+</body>
+
+
+</html>

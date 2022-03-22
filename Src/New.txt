@@ -1,5 +1,5 @@
-v.0.0.5 :
--Ajout des règles du jeu de base
--Création du header
--Création de l'affichage des noms et PV dans le header
--Ajout de la personnalisation des noms de joueurs
+v.1.0.0 :
+-Ajout des règles et fonctionnalités basiques du jeu.
+-Création du header et du footer.
+-Création de l'affichage des noms et PV dans le header.
+-Ajout de la personnalisation du nom du joueur.

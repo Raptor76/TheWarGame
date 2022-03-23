@@ -1,5 +1,10 @@
-v.1.0.0 :
+v.1.0.0
 -Ajout des règles et fonctionnalités basiques du jeu.
 -Création du header et du footer.
 -Création de l'affichage des noms et PV dans le header.
 -Ajout de la personnalisation du nom du joueur.
+
+v.1.1.0
+-Les PVs ne peuvent plus être négatifs.
+-Ajout de barres de vie.
+-Ajustement du délai d'affichage des actions.

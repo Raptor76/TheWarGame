@@ -122,9 +122,26 @@ body{
 }
 
 .playerInfo{
+    position: relative;
+    padding: 0;
     margin-right: 25px;
     width: 200px;
+    height: 6vh;
     text-align: center;
+    border: 2px solid white;
+    overflow: hidden;
+    border-radius: 5px;
+    background: white;
+    background-size: 50%;
+}
+
+.player-name{
+    margin: auto;
+
+}
+
+.player-pv{
+    margin: auto;
 }
 
 .choix{
@@ -161,3 +178,15 @@ body{
     position: absolute;
     top: 30%;
 }
+
+.pvBar{
+    position: absolute;
+    left: 1px;
+    bottom: 4px;
+    background-color: rgb(131, 218, 0);
+    width: 99%;
+    height: 20%;
+    border: none;
+    border-radius: 5px;
+}
+

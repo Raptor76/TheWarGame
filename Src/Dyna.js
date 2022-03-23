@@ -50,10 +50,6 @@ function valid() {
     let game = document.getElementById('game');
     let divName = document.getElementsByClassName('name');
     let btn = document.getElementById('valid-btn');
-    // let attack = document.createElement('input');
-    // let defend = document.createElement('input');
-    // let health = document.createElement('input');
-    // let btnDiv = document.createElement('div');
     let pDiv = document.createElement('div');
     let p = document.createElement('p');
 
@@ -65,37 +61,11 @@ function valid() {
 
     p.setAttribute('class', 'question');
     p.setAttribute('id', 'question');
-    // p.innerHTML = player1 + ", que veux-tu faire ?";
     divP.appendChild(p)
 
-
-    // btnDiv.setAttribute('class', 'choix');
-    // btnDiv.setAttribute('id', 'choix');
-    // game.appendChild(btnDiv);
-
-    // attack.setAttribute('type', 'button');
-    // defend.setAttribute('type', 'button');
-    // health.setAttribute('type', 'button');
-
-    // attack.setAttribute('class', 'action');
-    // defend.setAttribute('class', 'action');
-    // health.setAttribute('class', 'action');
-
-    // attack.setAttribute('onclick', 'action(this)');
-    // defend.setAttribute('onclick', 'action(this)');
-    // health.setAttribute('onclick', 'action(this)');
-
-    // attack.setAttribute('value','Attaquer');
-    // defend.setAttribute('value','Se Défendre');
-    // health.setAttribute('value','Se Soigner');
-
-    // btnDiv.appendChild(attack);
-    // btnDiv.appendChild(defend);
-    // btnDiv.appendChild(health);
-
     jeu();
-    createPv(playerNom, "player-life", header);
-    createPv(player2, "ia-life", header);
+    createPv(playerNom, "player-life", header, "pvJoueur");
+    createPv(player2, "ia-life", header, "pvIa");
 
     game.removeChild(divName[0]);
     game.removeChild(btn);
@@ -104,10 +74,11 @@ function valid() {
 
 };
 
-function createPv(playerName, id, header) {
+function createPv(playerName, id, header, idBar) {
     let name = document.createElement('p');
     let life = document.createElement('p');
     let container = document.createElement('div');
+    let pvBar = document.createElement('div');
 
     container.setAttribute('class', 'playerInfo');
 
@@ -118,10 +89,13 @@ function createPv(playerName, id, header) {
     life.setAttribute('id', id);
     life.innerHTML = "PV : " + PV1;
 
+    pvBar.setAttribute('class', 'pvBar');
+    pvBar.setAttribute('id', idBar);
+
     header.appendChild(container);
     container.appendChild(name);
     container.appendChild(life);
-
+    container.appendChild(pvBar);
 
 };
 
@@ -129,6 +103,8 @@ function action(btn) {
     let ia = Math.floor(Math.random() * 3); //0-Attaquer 1-Defendre 2-Soin
     let playerLife = document.getElementById('player-life');
     let iaLife = document.getElementById('ia-life');
+    let playerBar = document.getElementById('pvJoueur');
+    let iaBar = document.getElementById('pvIa');
 
     if (btn.value == "Attaquer") {
         if (ia == 0) {
@@ -136,6 +112,12 @@ function action(btn) {
             PV2 -= 3;
             if (PV1 > 10) { PV1 = 10 };
             if (PV2 > 10) { PV2 = 10 };
+            if (PV1 < 0) { PV1 = 0 };
+            if (PV2 < 0) { PV2 = 0 };
+            playerBar.setAttribute('data-done', PV1*10-1);
+            iaBar.setAttribute('data-done', PV2*10-1);
+            playerBar.style.width = playerBar.getAttribute('data-done') + "%";
+            iaBar.style.width = iaBar.getAttribute('data-done') + "%";
             playerLife.innerHTML = "PV : " + PV1;
             iaLife.innerHTML = "PV : " + PV2;
             aJoue(btn.value, "Attaquer");
@@ -144,6 +126,9 @@ function action(btn) {
         } else if (ia == 1) {
             PV2 -= 1;
             if (PV2 > 10) { PV2 = 10 };
+            if (PV2 < 0) { PV2 = 0 };
+            iaBar.setAttribute('data-done', PV2*10-1);
+            iaBar.style.width = iaBar.getAttribute('data-done') + "%";
             iaLife.innerHTML = "PV : " + PV2;
             aJoue(btn.value, "La Défense");
 
@@ -156,6 +141,9 @@ function action(btn) {
         if (ia == 0) {
             PV1 -= 1;
             if (PV1 > 10) { PV1 = 10 };
+            if (PV1 < 0) { PV1 = 0 };
+            playerBar.setAttribute('data-done', PV1*10-1);
+            playerBar.style.width = playerBar.getAttribute('data-done') + "%";
             playerLife.innerHTML = "PV : " + PV1;
             aJoue(btn.value, "Attaquer");
 
@@ -166,6 +154,9 @@ function action(btn) {
         } else {
             PV2 += 3;
             if (PV2 > 10) { PV2 = 10 };
+            if (PV2 < 0) { PV2 = 0 };
+            iaBar.setAttribute('data-done', PV2*10-1);
+            iaBar.style.width = iaBar.getAttribute('data-done') + "%";
             iaLife.innerHTML = "PV : " + PV2;
             aJoue(btn.value, "Se Soigner");
         }
@@ -176,6 +167,9 @@ function action(btn) {
         } else if (ia == 1) {
             PV1 += 3;
             if (PV1 > 10) { PV1 = 10 };
+            if (PV1 < 0) { PV1 = 0 };
+            playerBar.setAttribute('data-done', PV1*10-1);
+            playerBar.style.width = playerBar.getAttribute('data-done') + "%";
             playerLife.innerHTML = "PV : " + PV1;
             aJoue(btn.value, "Se Défendre");
 
@@ -184,13 +178,18 @@ function action(btn) {
             PV2 += 3;
             if (PV1 > 10) { PV1 = 10 };
             if (PV2 > 10) { PV2 = 10 };
+            if (PV1 < 0) { PV1 = 0 };
+            if (PV2 < 0) { PV2 = 0 };
+            playerBar.setAttribute('data-done', PV1*10-1);
+            iaBar.setAttribute('data-done', PV2*10-1);
+            playerBar.style.width = playerBar.getAttribute('data-done') + "%";
+            iaBar.style.width = iaBar.getAttribute('data-done') + "%";
             playerLife.innerHTML = "PV : " + PV1;
             iaLife.innerHTML = "PV : " + PV2;
             aJoue(btn.value, "Se Soigner");
 
         }
     }
-    // console.log(ia, "et btn = ", btn.value);
 }
 
 function aJoue(playerAction, iaAction) {
@@ -200,13 +199,13 @@ function aJoue(playerAction, iaAction) {
 
     game.removeChild(btn);
 
-    if (PV1 < 1){
+    if (PV1 == 0){
         question.innerHTML = "Tu as perdu ! "
-    } else if (PV2 < 1){
+    } else if (PV2 == 0){
         question.innerHTML = "Tu as gagné ! "
     } else{
     question.innerHTML = "Ton action : " + playerAction + "<br/> L'Action de l'ordi : " + iaAction
-    const timeout = setTimeout(jeu, 3000);
+    const timeout = setTimeout(jeu, 1500);
     }
 
 }
